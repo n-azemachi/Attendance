@@ -1,0 +1,21 @@
+// Place all the styles related to the time_cards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.heading {
+  background-color: skyblue;
+}
+
+.main-wrapper {
+   width: 100%;
+}
+
+.main-table {
+    margin: 0 auto;
+  text-align: center;
+  width: 1000px;
+  
+  th {
+      width: 200px;
+  }
+}
