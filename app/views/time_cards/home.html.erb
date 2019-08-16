@@ -1,2 +1,14 @@
-<h1 class="text-center">勤怠管理システム</h1>
-<%= link_to "一覧", time_cards_path, class: 'btn btn-primary' %>
+<%= stylesheet_link_tag 'home' %>
+<%= javascript_include_tag 'home' %>
+
+<div class="container">
+  <h1 class="text-center">勤怠管理システム</h1>
+
+  <div class="top-wrapper text-center">
+    <h3>Webで打刻できる、クラウド勤怠管理サービス</h3>
+    <h3>勤怠管理を楽にしませんか？</h3>
+    <%= link_to "アカウント作成　→", new_user_registration_path, class: "btn-flat-double-border" %>
+  </div>
+  
+</div>
+

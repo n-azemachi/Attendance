@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :time_cards, dependent: :destroy
   
-  delegate :name, to: :profile
+  delegate :name, to: :profile, allow_nil: true
 end

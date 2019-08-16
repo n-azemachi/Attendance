@@ -1,15 +1,15 @@
 class TimeCardsController < ApplicationController
   before_action :authenticate_user!, except: [:home]
   before_action :findtimecard, only: [:show, :edit, :update, :destroy]
-  before_action :validate_user, only: [:show, :edit, :update, :destroy]
+ # before_action :validate_user, only: [:show, :edit, :update, :destroy]
   def home
   end
 
   def index
-    @time_cards = current_user.time_cards.order(created_at: :asc)
+    @time_cards = current_user.time_cards.order(day: :asc)
     
     if params[:id].present?
-    @time_card = TimeCard.find(params[:id])
+    findtimecard
     else
     @time_card = TimeCard.new
     end
@@ -17,9 +17,6 @@ class TimeCardsController < ApplicationController
   
   def new
     @time_card = TimeCard.new
-  end
-  
-  def show
   end
   
   def edit
@@ -38,10 +35,10 @@ class TimeCardsController < ApplicationController
   def update
   respond_to do |format|
     if @time_card.update(time_card_params)
-      format.html { redirect_to request.referer, notice: 'User was successfully updated.' }
-      format.json { render :show, status: :ok, location: @time_card }
+      format.html { redirect_to time_cards_path, notice: '勤怠を編集しました！' }
+      format.json { render :index, status: :ok, location: @time_card }
     else
-      format.html { render :edit }
+      format.html { render :index }
       format.json { render json: @time_card.errors, status: :unprocessable_entity }
     end
   end

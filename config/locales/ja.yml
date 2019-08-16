@@ -2,6 +2,15 @@
 ja:
   activerecord:
     errors:
+    models:
+      time_card: タイムカード # view側： User.model_name.human => "ユーザ" / t("activerecord.models.user")と同じ
+    attributes:
+      time_card:
+        id: "ID"
+        division: "区分"
+        day: "日付"
+        starttime: "開始時間"
+        endtime: "終了時間"
       model:
         user:
           attributes:
