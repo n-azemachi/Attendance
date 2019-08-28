@@ -1,5 +1,45 @@
-<h1 class="text-center">勤怠表</h1>
+<%= stylesheet_link_tag 'index' %>
+<%= javascript_include_tag 'index' %>
+
+<h1>勤怠表</h1>
 <div class="main-wrapper">
+  <div class="top-wrapper">
+    <div class="profile">
+      <%= image_tag 'no-select.jpg', class: "index-image-size" %>
+      <p><%= current_user.name %></p>
+      <p><%= current_user.email %></p>
+      <p class="underbar">開始時間 08:30</p>
+    </div>
+    <div class="change-btn"><button class="btn-flat-double-border">表示月変更</button>
+    <div class="main-form">
+      
+      <table class="table table-bordered">
+        <thead class="heading">
+          <tr>
+            <th>作業月</th>
+            <th>所定時間</th>
+            <th>稼働時間</th>
+            <th>時間外</th>
+            <th>勤務日数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2019年1月</td>
+            <td>150時間</td>
+            <td>150時間</td>
+            <td>3時間</td>
+            <td>20日</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+  <%= link_to "新規作成", new_time_card_path, remote: true, class: "btn btn-primary" %>
+<div id="time-card-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+  
+<div class="table-wrapper">
   <div class="main-table">
    <table class="table table-bordered">
   <thead class="heading">
@@ -19,9 +59,10 @@
   <table class="table table-borderd">
   <tbody>
     <tr>
-      <td class="btn btn-success"><%= link_to "編集", time_cards_path(id: t.id) %></td>
+      <td><%= link_to "編集", edit_time_card_path(t.id), remote: true, class: "btn btn-primary" %></td>
+      <td><%= t.id %></td>
       <td><%= t.division %></td>
-      <td><%= t.day %></td>
+      <td><%= t.day.strftime("%m/%d(#{%w(日 月 火 水 木 金 土)[Time.now.wday]})") %></td>
       <td><%= t.starttime.strftime('%H時%M分') %></td>
       <td><%= t.endtime.strftime('%H時%M分') %></td>
       <td><%= link_to '削除', time_card_path(t), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: "btn btn-danger"%></td>
@@ -29,43 +70,10 @@
   </tbody>
 </table>
 </div>
+
 <% end %>
 <% end %>
 </div>
+</div>
 
 
-<h1 class="text-center">Listing TimeCards</h1>
-
-<%= form_for(@time_card) do |f| %>
-  <% if @time_card.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@time_card.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @time_card.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :division %><br>
-    <%= f.text_field :division, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :day %><br>
-    <%= f.date_select :day, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :starttime %><br>
-    <%= f.time_select :starttime, :minute_step => 5, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :endtime %><br>
-    <%= f.time_select :endtime, :minute_step => 5, class: "form-control" %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: "btn btn-primary"%>
-  </div>
-<% end %>

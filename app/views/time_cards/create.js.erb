@@ -1,0 +1,6 @@
+<% if @status == 'success' %>
+    $("tbody").append("<%= j(render("tr", user: @time_card)) %>");
+<%  elsif @status == 'fail' %>
+    alert('error!');
+<% end %>
+$("#time-card-modal").modal("hide");

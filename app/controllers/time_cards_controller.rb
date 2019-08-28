@@ -19,29 +19,35 @@ class TimeCardsController < ApplicationController
     @time_card = TimeCard.new
   end
   
-  def edit
-  end
-  
   def create
     @time_card = TimeCard.new(time_card_params)
     @time_card.user_id = current_user.id
-    if @time_card.save
-      redirect_to time_cards_path, notice: "勤怠を登録しました！"
-    else
-      render :index, alert: "勤怠の登録に失敗しました。もう一度試して下さい"
+    respond_to do |format|
+      if @time_card.save
+        format.html { redirect_to time_cards_path, notice: '勤怠を登録しました！' }
+        format.json { render :index, status: :created, location: @time_card }
+        # 追加
+        format.js { @status = "success" }
+      else
+        format.html { render :index }
+        format.json { render json: @time_card.errors, status: :unprocessable_entity }
+        # 追加
+        format.js { @status = "fail" }
+      end
     end
   end
   
   def update
-  respond_to do |format|
+    respond_to do |format|
     if @time_card.update(time_card_params)
-      format.html { redirect_to time_cards_path, notice: '勤怠を編集しました！' }
+      format.html { redirect_to time_cards_path, notice: "勤怠を更新しました" }
       format.json { render :index, status: :ok, location: @time_card }
     else
       format.html { render :index }
       format.json { render json: @time_card.errors, status: :unprocessable_entity }
     end
   end
+  
   end
   
   def destroy

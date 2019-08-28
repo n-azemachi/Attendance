@@ -1,0 +1,58 @@
+// Place all the styles related to the time_cards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.heading {
+  background-color: skyblue;
+}
+
+.main-wrapper {
+   width: 100%;
+   border: solid 1px #a9a9a9;
+   margin: 10px;
+}
+
+.table-wrapper {
+  border: solid 1px #a9a9a9;
+  margin: 10px;
+}
+
+.main-table {
+    margin: 0 auto;
+  text-align: center;
+  width: 1000px;
+  
+  th {
+      width: 200px;
+  }
+}
+
+.btn-flat-double-border {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: double 4px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+}
+.btn-flat-double-border:hover {
+  background: #fffbef;
+}
+
+.main-form {
+  width: 800px;
+}
+
+.top-wrapper {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.profile {
+  border: solid 1px #a9a9a9;
+}
+
+.change-btn {
+  margin: 0 auto;
+}
